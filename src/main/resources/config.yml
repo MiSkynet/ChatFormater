@@ -7,4 +7,5 @@
 
 # <- Configurations ->
 
-chat-format: "%playername% | %message%"
+# The default look of the chat
+chat-format: "%player% | %message%"

@@ -15,15 +15,26 @@ public class chatListener implements Listener {
     @EventHandler
     private void playerChatEvent(AsyncPlayerChatEvent event) {
 
+        // Register all strings
         String playername = event.getPlayer().getName();
         String configChatFormat = plugin.getConfig().getString("chat-format");
+        String message = event.getMessage();
         String finalFormat = "";
 
+        // If the string in the config.yml is 'default'
+        // If it isn't, use the string from the config.yml
         if (configChatFormat.equals("default")) {
             finalFormat = "<%playername%>";
         }
+        else {
+            finalFormat = configChatFormat;
+        }
 
-        finalFormat.replace("%playername%", playername);
+        // Default replacement for the string
+        // (player name, message)
+        finalFormat
+                .replace("%playername%", playername)
+                .replace("%message%", message);
         event.setFormat(finalFormat);
 
     }

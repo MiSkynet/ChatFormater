@@ -9,9 +9,11 @@ public final class Main extends JavaPlugin {
     public void onEnable() {
         // Plugin startup logic
 
+        // Setup config
         getConfig().options().copyDefaults();
         saveConfig();
 
+        // Register the listener
         getServer().getPluginManager().registerEvents(new chatListener(this), this);
     }
 
