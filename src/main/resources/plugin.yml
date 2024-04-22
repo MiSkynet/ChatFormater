@@ -1,0 +1,5 @@
+name: ChatFormater
+version: '${project.version}'
+main: de.miskynet.chatformater.Main
+api-version: '1.20'
+authors: [MiSkynet]
