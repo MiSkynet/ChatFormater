@@ -23,15 +23,22 @@ public class chatListener implements Listener {
         String player = event.getPlayer().getName();
         String message = event.getMessage();
         String finalFormat;
+        Boolean chatColorEnabled = plugin.getConfig().getBoolean("allow-chat-color");
+        String chatFormat = plugin.getConfig().getString("chat-format");
         User user = LuckPermsProvider.get().getPlayerAdapter(Player.class).getUser(event.getPlayer());
+
+        // If the 'allow-chat-color' is activated
+        if (chatColorEnabled) {
+            message = ChatColor.translateAlternateColorCodes('&', mesaage);
+        }
 
         // If the string in the config.yml is 'default' or is null
         // Otherwise use the string from the config.yml
-        if (plugin.getConfig().getString("chat-format").equals("default") || plugin.getConfig().getString("chat-format") == null) {
+        if (chatFormat.equals("default") || chatFormat  == null) {
             finalFormat = "<%player%> %message%";
         }
         else {
-            finalFormat = plugin.getConfig().getString("chat-format");
+            finalFormat = chatFormat;
         }
 
         // Default replacement for the string
