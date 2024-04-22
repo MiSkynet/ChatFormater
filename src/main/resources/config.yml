@@ -1,0 +1,10 @@
+# <- Credits & Information ->
+
+# The plugin was created to set the format of the chat.
+# All placeholders are in the description of the current point
+# The plugin can be combined with Luckperms and PlaceholderAPI (placeholders of the two APIs can be used)
+# The whole thing is open source on my github (https://github.com/MiSkynet)
+
+# <- Configurations ->
+
+chat-format: "%playername% | %message%"
