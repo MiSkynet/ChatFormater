@@ -11,7 +11,7 @@ public final class Main extends JavaPlugin {
 
         // Setup config
         getConfig().options().copyDefaults();
-        saveConfig();
+        saveDefaultConfig();
 
         // Register the listener
         getServer().getPluginManager().registerEvents(new chatListener(this), this);

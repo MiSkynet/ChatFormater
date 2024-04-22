@@ -1,6 +1,10 @@
 package de.miskynet.chatformater.listener;
 
 import de.miskynet.chatformater.Main;
+import net.luckperms.api.LuckPerms;
+import net.luckperms.api.LuckPermsProvider;
+import net.luckperms.api.model.user.User;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
@@ -16,26 +20,32 @@ public class chatListener implements Listener {
     private void playerChatEvent(AsyncPlayerChatEvent event) {
 
         // Register all strings
-        String playername = event.getPlayer().getName();
-        String configChatFormat = plugin.getConfig().getString("chat-format");
+        String player = event.getPlayer().getName();
         String message = event.getMessage();
-        String finalFormat = "";
+        String finalFormat;
+        User user = LuckPermsProvider.get().getPlayerAdapter(Player.class).getUser(event.getPlayer());
 
-        // If the string in the config.yml is 'default'
-        // If it isn't, use the string from the config.yml
-        if (configChatFormat.equals("default")) {
-            finalFormat = "<%playername%>";
+        // If the string in the config.yml is 'default' or is null
+        // Otherwise use the string from the config.yml
+        if (plugin.getConfig().getString("chat-format").equals("default") || plugin.getConfig().getString("chat-format") == null) {
+            finalFormat = "<%player%> %message%";
         }
         else {
-            finalFormat = configChatFormat;
+            finalFormat = plugin.getConfig().getString("chat-format");
         }
 
         // Default replacement for the string
         // (player name, message)
-        finalFormat
-                .replace("%playername%", playername)
-                .replace("%message%", message);
-        event.setFormat(finalFormat);
+        finalFormat = finalFormat
+                .replaceAll("%player%", player)
+                .replaceAll("%message%", message);
+
+        // Set a players prefix
+        if (user.getCachedData().getMetaData().getPrefix() != null) {
+            finalFormat = finalFormat.replace("%prefix%", user.getCachedData().getMetaData().getPrefix());
+        }
+
+        event.setFormat(finalFormat.replaceAll("%", "%%"));
 
     }
 }

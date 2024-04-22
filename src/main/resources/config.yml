@@ -1,11 +1,18 @@
-# <- Credits & Information ->
+# <- Information ->
 
 # The plugin was created to set the format of the chat.
-# All placeholders are in the description of the current point
+# All placeholders are in the description of the current point.
 # The plugin can be combined with Luckperms and PlaceholderAPI (placeholders of the two APIs can be used)
 # The whole thing is open source on my github (https://github.com/MiSkynet)
+# If something breaks, the config.yml can simply be deleted and the plugin reloaded.
 
 # <- Configurations ->
 
-# The default look of the chat
-chat-format: "%player% | %message%"
+# The appearance of the chat can be determined here
+# These placeholders can be used here:
+# %player% returns the player name
+# %message% returns the message
+# %prefix% returns the players prefix (LuckPerms related)
+# (The %prefix% placeholder only works if the players has a prefix,
+# else he'll be kicked with an error!)
+chat-format: "%player% §8» §f%message%"
