@@ -29,7 +29,7 @@ public class chatListener implements Listener {
 
         // If the 'allow-chat-color' is activated
         if (chatColorEnabled) {
-            message = ChatColor.translateAlternateColorCodes('&', mesaage);
+            message = ChatColor.translateAlternateColorCodes('&', message);
         }
 
         // If the string in the config.yml is 'default' or is null
