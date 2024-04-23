@@ -7,7 +7,7 @@ and other plugins. The plugin was written by me alone, so I would be happy to re
 negative comments are welcome.
 
 ## Installation and setup
-In order to use the plugin you must first download the plugin [here](https://hangar.papermc.io/MiSkynet/ChatFormater). 
+In order to use the plugin you must first download the plugin [here](https://hangar.papermc.io/MiSkynet/ChatFormater/versions). 
 Once it's downloaded you just have to drag it into your server's plugins order and restart the server.
 
 ## Configuration (config.yml)
