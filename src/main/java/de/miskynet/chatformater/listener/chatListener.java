@@ -1,9 +1,9 @@
 package de.miskynet.chatformater.listener;
 
 import de.miskynet.chatformater.Main;
-import net.luckperms.api.LuckPerms;
 import net.luckperms.api.LuckPermsProvider;
 import net.luckperms.api.model.user.User;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -49,7 +49,9 @@ public class chatListener implements Listener {
 
         // Set a players prefix
         if (user.getCachedData().getMetaData().getPrefix() != null) {
-            finalFormat = finalFormat.replace("%prefix%", user.getCachedData().getMetaData().getPrefix());
+            if (!(user.getCachedData().getMetaData().getPrefix().equals(""))) {
+                finalFormat = finalFormat.replace("%prefix%", user.getCachedData().getMetaData().getPrefix());
+            }
         }
 
         event.setFormat(finalFormat.replaceAll("%", "%%"));
