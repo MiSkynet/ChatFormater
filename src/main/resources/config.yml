@@ -1,7 +1,12 @@
 # <- Information ->
 
+# Current plugin version: 2.0.0
+# Made by: MiSkynet
+# Github: https://github.com/MiSkynet
+# PaperMC: https://hangar.papermc.io/MiSkynet
+
 # The plugin was created to set the format of the chat.
-# The whole thing is open source on my github (https://github.com/MiSkynet)
+# The whole thing is open source on my github
 # If something breaks, the config.yml can simply be deleted and the plugin reloaded.
 
 # <- Configurations ->
@@ -11,9 +16,23 @@
 # %player% returns the player name
 # %message% returns the message
 # %prefix% returns the players prefix (LuckPerms related)
+# %time% represents the real time the message was sent
 chat-format: "%player% §8» §f%message%"
+
+# The time-format option can be used to set the format for the %time% placeholder.
+# The time is taken based on the server region.
+# There are also special placeholders:
+# %HH% represents the hours
+# %MM% represents the minutes
+# %SS% represents the seconds
+time-format: "%HH%:%MM%:%SS%"
 
 # With this option you can visually customize your message in the chat 
 # with '&' + <color code>
 # (If this setting is activated, everyone can visually customize their message)
 allow-chat-color: true
+
+# Banned words can be entered in this list and will be censored in the chat.
+# Please note that the format is always as in the example:
+# example: blacklisted-words: [word1,word2,...]
+blacklisted-words: []

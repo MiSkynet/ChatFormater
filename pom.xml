@@ -6,7 +6,7 @@
 
   <groupId>de.miskynet</groupId>
   <artifactId>ChatFormater</artifactId>
-  <version>1.0.0</version>
+  <version>2.0.0</version>
   <packaging>jar</packaging>
 
   <name>ChatFormater</name>
@@ -58,12 +58,6 @@
           <id>sonatype</id>
           <url>https://oss.sonatype.org/content/groups/public/</url>
       </repository>
-
-      <!-- PlaceholderAPI API -->
-      <repository>
-          <id>placeholderapi</id>
-          <url>https://repo.extendedclip.com/content/repositories/placeholderapi/</url>
-      </repository>
   </repositories>
 
   <dependencies>
@@ -71,14 +65,6 @@
           <groupId>io.papermc.paper</groupId>
           <artifactId>paper-api</artifactId>
           <version>1.20.4-R0.1-SNAPSHOT</version>
-          <scope>provided</scope>
-      </dependency>
-
-      <!-- PlaceholderAPI API -->
-      <dependency>
-          <groupId>me.clip</groupId>
-          <artifactId>placeholderapi</artifactId>
-          <version>2.11.5</version>
           <scope>provided</scope>
       </dependency>
 

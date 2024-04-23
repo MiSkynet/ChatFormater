@@ -9,6 +9,10 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+
 public class chatListener implements Listener {
 
     private static Main plugin;
@@ -19,13 +23,30 @@ public class chatListener implements Listener {
     @EventHandler
     private void playerChatEvent(AsyncPlayerChatEvent event) {
 
-        // Register all strings
+        // Register
         String player = event.getPlayer().getName();
         String message = event.getMessage();
         String finalFormat;
-        Boolean chatColorEnabled = plugin.getConfig().getBoolean("allow-chat-color");
+        String playerMessageLowerCased = message.toLowerCase();
         String chatFormat = plugin.getConfig().getString("chat-format");
+        Boolean chatColorEnabled = plugin.getConfig().getBoolean("allow-chat-color");
+
         User user = LuckPermsProvider.get().getPlayerAdapter(Player.class).getUser(event.getPlayer());
+
+        // Censor blacklisted words
+        ArrayList<String> blacklistedwords = (ArrayList<String>) plugin.getConfig().getStringList("blacklisted-words");
+        for (String blacklistedword : blacklistedwords) {
+            blacklistedword = blacklistedword.toLowerCase();
+            if (playerMessageLowerCased.contains(blacklistedword)) {
+                StringBuilder cleanedWord = new StringBuilder();
+                for (int i = 0; i < blacklistedword.length(); i++) {
+                    cleanedWord.append("*");
+                    System.out.println(cleanedWord);
+                }
+                message = message.substring(0, message.toLowerCase().indexOf(blacklistedword)) + cleanedWord + message.substring(message.toLowerCase().indexOf(blacklistedword) + blacklistedword.length());
+            }
+        }
+
 
         // If the 'allow-chat-color' is activated
         if (chatColorEnabled) {
@@ -44,8 +65,9 @@ public class chatListener implements Listener {
         // Default replacement for the string
         // (player name, message)
         finalFormat = finalFormat
-                .replaceAll("%player%", player)
-                .replaceAll("%message%", message);
+                .replace("%player%", player)
+                .replace("%message%", message)
+                .replace("%time%", timeFormater());
 
         // Set a players prefix
         if (user.getCachedData().getMetaData().getPrefix() != null) {
@@ -57,4 +79,22 @@ public class chatListener implements Listener {
         event.setFormat(finalFormat.replaceAll("%", "%%"));
 
     }
+
+    private static String timeFormater() {
+        String formattedTime = "";
+        LocalDateTime now = LocalDateTime.now();
+
+        String configtimeformat = plugin.getConfig().getString("time-format");
+
+        configtimeformat = configtimeformat
+                .replace("%HH%", "HH")
+                .replace("%MM%", "mm")
+                .replace("%SS%", "ss");
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(configtimeformat);
+        formattedTime = now.format(formatter);
+
+        return formattedTime;
+    }
+
 }
