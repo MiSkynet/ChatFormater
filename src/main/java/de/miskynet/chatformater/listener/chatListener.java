@@ -100,5 +100,4 @@ public class chatListener implements Listener {
     private static String configString(String string) {
         return plugin.getConfig().getString(string);
     }
-
 }
