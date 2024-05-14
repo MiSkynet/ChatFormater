@@ -17,7 +17,6 @@ This is what the config.yml looks like in the latest plugin version:
 ``` 
 # <- Information ->
 
-# Current plugin version: 2.0.0
 # Made by: MiSkynet
 # Github: https://github.com/MiSkynet
 # PaperMC: https://hangar.papermc.io/MiSkynet
@@ -34,6 +33,7 @@ This is what the config.yml looks like in the latest plugin version:
 # %message% returns the message
 # %prefix% returns the players prefix (LuckPerms related)
 # %time% represents the real time the message was sent
+# If this option is set to -default or -d, Minecraft's chat format will be used
 chat-format: "%player% §8» §f%message%"
 
 # The time-format option can be used to set the format for the %time% placeholder.
@@ -48,6 +48,10 @@ time-format: "%HH%:%MM%:%SS%"
 # with '&' + <color code>
 # (If this setting is activated, everyone can visually customize their message)
 allow-chat-color: true
+
+# With this permission you can edit your message in the chat with '&' + <color code>
+# If this is set to -all or -a, as long as it is enabled, anyone can use it
+chat-color-permission: chatformater.chatcolor
 
 # Banned words can be entered in this list and will be censored in the chat.
 # Please note that the format is always as in the example:
