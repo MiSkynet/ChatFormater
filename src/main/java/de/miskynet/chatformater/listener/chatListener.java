@@ -47,15 +47,16 @@ public class chatListener implements Listener {
             }
         }
 
-
-        // If the 'allow-chat-color' is activated
+        // If the 'allow-chat-color' is activated and the player has the Permission
         if (chatColorEnabled) {
-            message = ChatColor.translateAlternateColorCodes('&', message);
+            if (event.getPlayer().hasPermission(configString("chat-color-permission")) || configString("chat-color-permission").equals("-all")  || configString("chat-color-permission").equals("-a")) {
+                message = ChatColor.translateAlternateColorCodes('&', message);
+            }
         }
 
         // If the string in the config.yml is 'default' or is null
         // Otherwise use the string from the config.yml
-        if (chatFormat.equals("default") || chatFormat  == null) {
+        if (chatFormat.equals("-default") || chatFormat.equals("-d") || chatFormat  == null) {
             finalFormat = "<%player%> %message%";
         }
         else {
@@ -77,7 +78,6 @@ public class chatListener implements Listener {
         }
 
         event.setFormat(finalFormat.replaceAll("%", "%%"));
-
     }
 
     private static String timeFormater() {
@@ -95,6 +95,10 @@ public class chatListener implements Listener {
         formattedTime = now.format(formatter);
 
         return formattedTime;
+    }
+
+    private static String configString(String string) {
+        return plugin.getConfig().getString(string);
     }
 
 }
